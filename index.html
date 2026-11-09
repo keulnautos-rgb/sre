@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRE-RAEOA</title>
+    <link rel="website icon" href="dit.png">
+    <!-- Menggunakan Font Google Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET & VARIABEL --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #003cff; 
+            --secondary-blue: #3b82f6;
+            --footer-cyan: #06b6d4;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* HEADER & NAVIGASI */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-placeholder {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .logo-placeholder img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        .header-title h1 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+        
+        .header-title p {
+            font-size: 12px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* HERO SLIDER */
+        .hero {
+            width: 100%;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .slider {
+            display: flex;
+            width: 400%; 
+            height: 100%;
+            animation: slide 20s infinite ease-in-out;
+        }
+
+        .slide {
+            width: 25%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+        }
+
+        @keyframes slide {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(0); }
+        }
+
+        .hero-text-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            width: 90%;
+        }
+
+        .hero-text-overlay h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        /* SECTION UMUM */
+        section {
+            padding: 60px 40px;
+            scroll-margin-top: 100px; 
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-blue);
+            font-size: 32px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-blue);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* TENTANG & FOTO */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background-color: white;
+        }
+
+        .about-text h2 {
+            color: var(--primary-blue);
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* VISI & MISI */
+        .vm-section {
+            background-color: var(--bg-light);
+        }
+
+        .vm-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .vm-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--secondary-blue);
+            transition: transform 0.3s ease;
+        }
+
+        .vm-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vm-card h3 {
+            color: var(--primary-blue);
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vm-card ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .vm-card ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            color: var(--text-gray);
+        }
+
+        .vm-card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-blue);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        /* TABEL DATA */
+        .table-section {
+            padding: 60px 40px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+            background: white;
+            min-width: 600px;
+        }
+
+        th {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-dark);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f5f9; 
+        }
+
+        tr:hover {
+            background-color: #e0f2fe; 
+        }
+
+        /* MAP & KONTAK */
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background-color: white;
+        }
+
+        .map-box, .contact-box {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .map-box h3, .contact-box h3 {
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            background: var(--secondary-blue);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .contact-item p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 15px;
+        }
+
+        .contact-item strong {
+            color: var(--text-dark);
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--footer-cyan) 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 15px;
+        }
+        
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 1024px) {
+            header { padding: 15px 20px; }
+            .header-title h1 { font-size: 20px; }
+            nav ul li a { padding: 8px 12px; font-size: 13px; }
+            section { padding: 50px 30px; }
+            .hero { height: 400px; }
+            .hero-text-overlay h2 { font-size: 34px; }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+                gap: 15px;
+            }
+            .header-brand {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .header-title h1 { font-size: 18px; }
+            nav {
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 5px;
+            }
+            nav ul {
+                justify-content: flex-start;
+                padding: 0 10px;
+                flex-wrap: nowrap;
+            }
+            nav ul li a {
+                padding: 8px 12px;
+                font-size: 13px;
+                background-color: rgba(255,255,255,0.1);
+            }
+            .about-section, .vm-grid, .bottom-section {
+                grid-template-columns: 1fr; 
+            }
+            .hero { height: 300px; }
+            .hero-text-overlay h2 { font-size: 26px; }
+            .hero-text-overlay p { font-size: 14px; }
+            section {
+                padding: 40px 15px;
+                scroll-margin-top: 160px;
+            }
+            .section-title { font-size: 26px; }
+            .vm-card { padding: 25px; }
+            .map-box, .contact-box { padding: 20px; }
+            .map-container { height: 250px; }
+            .table-container::after {
+                content: '← Geser untuk melihat data lengkap →';
+                display: block;
+                text-align: center;
+                font-size: 12px;
+                color: var(--text-gray);
+                padding-top: 10px;
+                font-style: italic;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-brand">
+                <div class="logo-placeholder">
+                    <img src="dit.png" alt="Logo Dinas">
+                </div>
+                <div class="header-title">
+                    <h1>SRE-RAEOA</h1>
+                    <p>SERVIÇO REGIONAL DA <span class="highlight-text">EDUCAÇÃO RAEOA</span></p>
+                </div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#tentang">Konaba SRE</a></li>
+                    <li><a href="#visi-misi">Vizaun & Misaun</a></li>
+                    <li><a href="#statistik">Statistik</a></li>
+                    <li><a href="#kontak">Kontaktu</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- HERO / SLIDER 4 FOTO -->
+        <section class="hero" id="home" style="padding: 0;">
+            <div class="slider">
+                <div class="slide" style="background-image: url('a.jpg');"></div>
+                <div class="slide" style="background-image: url('iii3.jpg');"></div>
+                <div class="slide" style="background-image: url('w.jpg');"></div>
+                <div class="slide" style="background-image: url('1.jpg');"></div>
+            </div>
+            <div class="hero-text-overlay">
+                <h2>Eduka Nasaun nia Moris</h2>
+                <p>Kria Edukasaun ho Kualidade, Ekuitativu no Karakterístiku</p>
+            </div>
+        </section>
+
+        <!-- TENTANG PENDIDIKAN & FOTO -->
+        <section class="about-section" id="tentang">
+            <div class="about-text">
+                <h2>Kona-ba Edukasaun</h2>
+                <p>Servisu Edukasaun iha papél estratéjiku hodi administra asuntu governu nian iha setór edukasaun. Ami iha kompromisu atu kontinua halo inovasaun hodi hadi'a kualidade rekursu umanu liuhosi edukasaun ne'ebé inkluzivu no ekuitativu.</p>
+                <p>Ami kontinua dezenvolve programa superiór oioin, hahú hosi hasa'e kompeténsia profesór sira nian, harii infraestrutura eskola nian, to'o fornese Merenda ba eskola hanesan EPE, EBF no EBC ba eskola Guvernu no ami mos apoiu Konsisoes ba Eskola sira hotu tuir kuantidade Estudante iha Timor-Leste estudu ba estudante sira ho rezultadu aas no sira ne'ebé laiha priviléjiu.</p>
+            </div>
+            <div class="about-image">
+                <img src="s1.JPG" alt="Kegiatan Belajar Siswa">
+            </div>
+        </section>
+
+        <!-- VISI & MISI -->
+        <section class="vm-section" id="visi-misi">
+            <h2 class="section-title">Vizaun & Misaun</h2>
+            <div class="vm-grid">
+                <div class="vm-card">
+                    <h3>🎯 Vizaun</h3>
+                    <p style="color: var(--text-gray); font-size: 16px; line-height: 1.8;">
+                       "Realizasaun edukasaun superiór, bazeia ba karakter, no kompetitivu globalmente bazeia ba fiar no piedade."
+                    </p>
+                </div>
+                <div class="vm-card">
+                    <h3>🚀 Misaun</h3>
+                    <ul>
+                        <li>Hadi'a asesu ekuitativu no kualidade servisu edukasaun nian.</li>
+                        <li>Dezenvolve kurríkulu ida ne'ebé bazeia ba kompeténsia no karakter.</li>
+                        <li>Hadi'a profisionalizmu no bem-estar edukadór sira nian.</li>
+                        <li>Harii infraestrutura edukasaun ida ne'ebé modernu no amigavel ba labarik sira.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TABEL DATA -->
+        <section class="table-section" id="statistik">
+            <h2 class="section-title">Dadus Estatístika SRE-RAEOA</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Eskola</th>
+                            <th>Total</th>
+                            <th>Estudante</th>
+                            <th>Total</th>
+                            <th>Profesores</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>EPE</strong></td>
+                            <td>10</td>
+                            <td><strong>EPE</strong></td>
+                            <td>25</td>
+                            <td><strong>EPE</strong></td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EBF</strong></td>
+                            <td>30</td>
+                            <td><strong>EBF</strong></td>
+                            <td>423</td>
+                            <td><strong>EBF</strong></td>
+                            <td>543</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EBC</strong></td>
+                            <td>20</td>
+                            <td><strong>EBC</strong></td>
+                            <td>354</td>
+                            <td><strong>EBC</strong></td>
+                            <td>234</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ESG</strong></td>
+                            <td>8</td>
+                            <td><strong>ESG</strong></td>
+                            <td>575</td>
+                            <td><strong>ESG</strong></td>
+                            <td>453</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TECVOC</strong></td>
+                            <td>4</td>
+                            <td><strong>TECVOC</strong></td>
+                            <td>532</td>
+                            <td><strong>TECVOC</strong></td>
+                            <td>55</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td>60</td>
+                            <td><strong>TOTAL</strong></td>
+                            <td>5932</td>
+                            <td><strong>TOTAL</strong></td>
+                            <td>505</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- MAP & KONTAK -->
+        <section class="bottom-section" id="kontak">
+            <div class="map-box">
+                <h3>📍 Ami nia Fatin</h3>
+                <div class="map-container">
+                    <!-- PETA BARU: Secretária Regional para a Educação e Solidariedade Social -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3932.765432109876!2d124.3710631!3d-9.1985698!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2c5565b3f27d729b%3A0xa546bc13253abb32!2sSecret%C3%A1ria+Regional+para+a+Educa%C3%A7%C3%A3o+e+Solidariedade+Social!5e0!3m2!1sid!2stl!4v1700000000000!5m2!1sid!2stl" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            <div class="contact-box">
+                <h3>📞 Kontaktu Ami</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">🏢</div>
+                        <div>
+                            <strong>Enderesu Eskritóriu</strong>
+                            <p>Oe-Sono, Costa, Sanane, RAEOA, Timor-Leste</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <strong>Telefone / WhatsApp</strong>
+                            <p>(021) 123-4567<br>3456-7890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <strong>Email Ofisiál</strong>
+                            <p>sre@edukasaun.go.id<br>sre13raeoa@gimal.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; 2026 SRE-RAEOA. Direitu hotu-hotu rezervadu.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
